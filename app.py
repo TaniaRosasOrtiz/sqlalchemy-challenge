@@ -32,11 +32,11 @@ app = Flask(__name__)
 def home():
     print("Server received request for 'Home' page...")
     return (f"Routes availables:<br/>"
-            f"Precipitation path /api/v1.0/precipitation<br/>"
-            f"Stations path /api/v1.0/stations<br/>"
-            f"Temperatures path /api/v1.0/tobs<br/>"
-            f"Temperatures path with time start /api/v1.0/start<br/>"
-            f"Temperatures path with time range /api/v1.0/start/end<br/>")
+            f"Precipitation path: <a href=/api/v1.0/precipitation>/api/v1.0/precipitation</a><br/>"
+            f"Stations path: <a href=/api/v1.0/stations>/api/v1.0/stations</a><br/>"
+            f"Temperatures path: <a href=/api/v1.0/tobs>/api/v1.0/tobs</a><br/>"
+            f"Temperatures path with date start using YYYY-MM-DD format: /api/v1.0/start<br/>"
+            f"Temperatures path with date range using YYYY-MM-DD format: /api/v1.0/start/end<br/>")
 
 # 4. Define what to do when a user hits the different routes
 
@@ -137,10 +137,10 @@ def start_input(start):
     	tob_avg ='{0:.4}'.format(results[0][1])
     	tob_max =results[0][2]
     
-    	result_printout =( ['Date to look: ' + start,
-    						'Min Temperature: '  + str(tob_min) + ' F',
-    						'Max Temperature: ' + str(tob_max) + ' F',
-    						'Average Temperature: ' + str(tob_avg) + ' F'])
+    	result_printout =( ['Start_time: ' + start,
+    						'Min_Temperature: '  + str(tob_min),
+    						'Max_Temperature: ' + str(tob_max),
+    						'Average_Temperature: ' + str(tob_avg)])
     	return jsonify(result_printout)
 
     return jsonify({"error": f"Input date {start} not valid"}), 404
@@ -179,10 +179,11 @@ def start_end_input(start, end):
     	tob_avg ='{0:.4}'.format(results[0][1])
     	tob_max =results[0][2]
 
-    	result_printout =( ['Date Range: ' + start + ' ' + end,
-    						'Min Temperature: '  + str(tob_min) + ' F',
-    						'Max Temperature: ' + str(tob_max) + ' F',
-    						'Average Temperature: ' + str(tob_avg) + ' F'])
+    	result_printout =( ['Start_time: ' + start,
+                            'End_time ' + end,
+    						'Min_Temperature: '  + str(tob_min),
+    						'Max_Temperature: ' + str(tob_max),
+    						'Average_Temperature: ' + str(tob_avg)])
     	return jsonify(result_printout)
 
 if __name__ == "__main__":
